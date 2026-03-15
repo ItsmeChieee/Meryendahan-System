@@ -15,7 +15,7 @@
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
     .screen{display:none;} .screen.active{display:flex;}
 
-    /* LOGIN */
+    /* ── LOGIN ── */
     #screen-login{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
     .login-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px;width:100%;max-width:400px;}
     .login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--accent);margin-bottom:4px;}
@@ -30,7 +30,7 @@
     .btn-login:hover{background:#ffb83f;}
     .btn-login:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;}
 
-    /* WELCOME */
+    /* ── WELCOME ── */
     #screen-welcome{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
     .welcome-greeting{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;margin-bottom:8px;}
     .welcome-greeting span{color:var(--accent);}
@@ -44,7 +44,7 @@
     .btn-secondary-action{padding:12px 28px;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;}
     .btn-secondary-action:hover{border-color:var(--text);color:var(--text);}
 
-    /* MAIN POS */
+    /* ── MAIN POS ── */
     #screen-pos{flex-direction:column;min-height:100vh;}
     header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-shrink:0;}
     .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);}
@@ -61,11 +61,11 @@
     .tab-content{display:none;flex:1;}
     .tab-content.active{display:flex;}
 
-    /* TAB: NEW ORDER */
+    /* ── TAB: NEW ORDER ── */
     #tab-order{display:grid;grid-template-columns:1fr 340px;height:calc(100vh - 56px);}
     .order-panel{overflow-y:auto;padding:20px;border-right:1px solid var(--border);}
     .panel-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
-    .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px;}
+    .meta-row{margin-bottom:22px;}
     .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px;}
     .field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color .2s;}
     .field input:focus{outline:none;border-color:var(--accent);}
@@ -75,8 +75,8 @@
     .cat-line{flex:1;height:1px;background:var(--border);}
     .items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
 
-    /* ITEM CARD */
-    .item-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;transition:border-color .2s;position:relative;}
+    /* ── ITEM CARD ── */
+    .item-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;position:relative;transition:border-color .2s;}
     .item-card.has-value{border-color:var(--accent);background:#1e1a10;}
     .item-name{font-family:'Syne',sans-serif;font-weight:600;font-size:13px;margin-bottom:8px;text-transform:capitalize;}
     .price-btns{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;}
@@ -94,7 +94,7 @@
     .amount-badge{position:absolute;top:8px;right:8px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;border-radius:5px;padding:2px 7px;display:none;}
     .item-card.has-value .amount-badge{display:block;}
 
-    /* SUMMARY */
+    /* ── SUMMARY PANEL ── */
     .summary-panel{display:flex;flex-direction:column;background:var(--surface);overflow:hidden;}
     .summary-header{padding:16px 18px 10px;border-bottom:1px solid var(--border);}
     .summary-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;}
@@ -119,26 +119,39 @@
     .btn-clear{width:100%;padding:9px;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;margin-top:6px;transition:all .2s;}
     .btn-clear:hover{border-color:var(--danger);color:var(--danger);}
 
-    /* TAB: EDIT ORDER */
+    /* ── TAB: EDIT ORDER ── */
     #tab-edit{flex-direction:column;padding:24px;overflow-y:auto;}
-    .edit-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px;}
-    .edit-subtitle{font-size:13px;color:var(--muted);margin-bottom:20px;}
-    .edit-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:flex-end;}
-    .edit-controls .field{flex:1;min-width:160px;}
-    .btn-fetch{padding:9px 20px;background:var(--info);color:#000;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;align-self:flex-end;}
-    .btn-fetch:hover{opacity:.85;}
-    .edit-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto;}
-    .edit-table{width:100%;border-collapse:collapse;font-size:13px;}
-    .edit-table th{background:var(--surface2);padding:10px 12px;text-align:left;font-family:'Syne',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
-    .edit-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
-    .edit-table tr:last-child td{border-bottom:none;}
-    .edit-table tr:hover td{background:var(--surface2);}
-    .editable-cell input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;width:90px;}
-    .editable-cell input:focus{outline:none;border-color:var(--accent);}
-    .btn-save-row{padding:5px 14px;background:var(--success);color:#000;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
-    .empty-edit{text-align:center;padding:48px;color:var(--muted);font-size:14px;}
+    .tab-header{margin-bottom:20px;}
+    .tab-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px;}
+    .tab-subtitle{font-size:13px;color:var(--muted);}
+    .btn-fetch-all{padding:10px 24px;background:var(--info);color:#000;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;margin-bottom:20px;}
+    .btn-fetch-all:hover{opacity:.85;}
 
-    /* TAB: END OF DAY */
+    /* Orders list in edit tab */
+    .edit-orders-list{display:flex;flex-direction:column;gap:12px;}
+    .edit-order-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .edit-order-card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
+    .edit-order-card-header:hover{background:#2a2a2a;}
+    .edit-order-meta{display:flex;gap:12px;align-items:center;}
+    .edit-order-row-num{font-size:11px;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;}
+    .edit-order-time{font-size:13px;color:var(--muted);}
+    .edit-order-customer{font-size:13px;font-weight:500;}
+    .edit-order-total{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--accent);}
+    .edit-order-body{display:none;padding:16px;}
+    .edit-order-body.open{display:block;}
+    .edit-items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:14px;}
+    .edit-item-field{display:flex;flex-direction:column;gap:4px;}
+    .edit-item-label{font-size:11px;color:var(--muted);text-transform:capitalize;}
+    .edit-item-input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;}
+    .edit-item-input:focus{outline:none;border-color:var(--accent);}
+    .edit-action-row{display:flex;gap:8px;align-items:center;padding-top:10px;border-top:1px solid var(--border);}
+    .btn-save-edit{padding:8px 20px;background:var(--success);color:#000;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;}
+    .btn-save-edit:hover{opacity:.85;}
+    .btn-delete-edit{padding:8px 16px;background:transparent;color:var(--danger);border:1px solid var(--danger);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;}
+    .btn-delete-edit:hover{background:var(--danger);color:#fff;}
+    .edit-empty{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;}
+
+    /* ── TAB: END OF DAY ── */
     #tab-eod{flex-direction:column;padding:24px;overflow-y:auto;align-items:center;justify-content:center;min-height:calc(100vh - 56px);}
     .eod-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;max-width:480px;width:100%;text-align:center;}
     .eod-icon{font-size:40px;margin-bottom:16px;}
@@ -147,7 +160,9 @@
     .eod-preview{background:var(--surface2);border-radius:10px;padding:16px;margin-bottom:20px;text-align:left;}
     .eod-preview-title{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;}
     .eod-preview-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border);}
-    .eod-preview-row:last-child{border-bottom:none;font-weight:700;color:var(--accent);}
+    .eod-preview-row:last-child{border-bottom:none;font-weight:700;color:var(--accent);font-size:15px;margin-top:4px;padding-top:8px;}
+    .btn-preview-eod{width:100%;margin-bottom:12px;padding:12px;font-size:14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;transition:all .2s;}
+    .btn-preview-eod:hover{border-color:var(--accent);color:var(--accent);}
     .btn-eod{width:100%;padding:16px;background:#c0392b;color:#fff;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;border:none;border-radius:12px;cursor:pointer;transition:all .2s;}
     .btn-eod:hover{opacity:.9;}
     .btn-eod:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;}
@@ -155,7 +170,7 @@
     .eod-done.show{display:block;}
     .eod-main.hide{display:none;}
 
-    /* SHARED */
+    /* ── SHARED ── */
     #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--success);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:10px 24px;border-radius:40px;z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap;}
     #toast.show{transform:translateX(-50%) translateY(0);}
     #toast.error{background:var(--danger);color:#fff;}
@@ -170,7 +185,6 @@
     @media(max-width:768px){
       #tab-order{grid-template-columns:1fr;}
       .summary-panel{max-height:50vh;}
-      .nav-center{gap:2px;}
       .nav-btn{padding:6px 10px;font-size:11px;}
     }
   </style>
@@ -214,7 +228,7 @@
     <div class="logo">Sales<span>Tracker</span></div>
     <div class="nav-center">
       <button class="nav-btn active" onclick="switchTab('order',this)">New Order</button>
-      <button class="nav-btn" onclick="switchTab('edit',this)">Edit Order</button>
+      <button class="nav-btn" onclick="switchTab('edit',this)">Edit Orders</button>
       <button class="nav-btn" onclick="switchTab('eod',this)">End of Day</button>
     </div>
     <div class="header-right">
@@ -229,8 +243,10 @@
     <div class="order-panel">
       <div class="panel-title">New Transaction</div>
       <div class="meta-row">
-        <div class="field"><label>Cashier Name</label><input type="text" id="cashier" placeholder="e.g. Maria" autocomplete="off" /></div>
-        <div class="field"><label>Customer Name <span style="color:var(--muted);font-size:10px;">(optional)</span></label><input type="text" id="customer" placeholder="e.g. Juan" autocomplete="off" /></div>
+        <div class="field">
+          <label>Customer Name <span style="color:var(--muted);font-size:10px;">(optional)</span></label>
+          <input type="text" id="customer" placeholder="e.g. Juan" autocomplete="off" />
+        </div>
       </div>
       <div class="category-block">
         <div class="cat-header"><span class="cat-label">Food</span><div class="cat-line"></div></div>
@@ -249,7 +265,10 @@
       <div class="order-list" id="order-list"><div class="order-empty">No items added yet.</div></div>
       <div class="totals-block">
         <div class="total-row"><span class="total-label">Items</span><span class="total-value" id="item-count">0</span></div>
-        <div class="grand-total-row"><span class="grand-total-label">TOTAL</span><span class="grand-total-value" id="grand-total">₱0</span></div>
+        <div class="grand-total-row">
+          <span class="grand-total-label">TOTAL</span>
+          <span class="grand-total-value" id="grand-total">₱0</span>
+        </div>
       </div>
       <div class="submit-area">
         <button class="btn-submit" id="btn-submit" onclick="submitOrder()" disabled>Submit Order</button>
@@ -258,15 +277,14 @@
     </div>
   </div>
 
-  <!-- TAB: EDIT ORDER -->
+  <!-- TAB: EDIT ORDERS -->
   <div id="tab-edit" class="tab-content">
-    <div class="edit-title">Edit an Order</div>
-    <div class="edit-subtitle">Enter the row number from your Google Sheet (check column A for the row number). Row 2 is the first transaction.</div>
-    <div class="edit-controls">
-      <div class="field"><label>Row Number</label><input type="number" id="edit-row-num" placeholder="e.g. 3" min="2" /></div>
-      <button class="btn-fetch" onclick="fetchRow()">Fetch Row</button>
+    <div class="tab-header">
+      <div class="tab-title">Today's Orders</div>
+      <div class="tab-subtitle">Click any order to expand and edit it. Changes save directly to Google Sheets.</div>
     </div>
-    <div id="edit-table-container"><div class="empty-edit">Enter a row number above and click Fetch Row.</div></div>
+    <button class="btn-fetch-all" onclick="loadAllOrders()">↻ Load / Refresh Orders</button>
+    <div id="edit-orders-container"><div class="edit-empty">Click "Load / Refresh Orders" to see today's transactions.</div></div>
   </div>
 
   <!-- TAB: END OF DAY -->
@@ -274,19 +292,19 @@
     <div class="eod-card">
       <div class="eod-main" id="eod-main">
         <div class="eod-icon">📊</div>
-        <div class="eod-title">End of Day Summary</div>
-        <div class="eod-desc">This totals every item sold today and appends a summary row to the bottom of today's sheet. Preview first, then finalize.</div>
+        <div class="eod-title">End of Day</div>
+        <div class="eod-desc">Preview today's item totals, then finalize. A summary row will be added to the bottom of today's sheet.</div>
         <div class="eod-preview" id="eod-preview" style="display:none;">
-          <div class="eod-preview-title">Today's Totals Preview</div>
+          <div class="eod-preview-title">Today's totals</div>
           <div id="eod-preview-rows"></div>
         </div>
-        <button class="btn-fetch" style="width:100%;margin-bottom:12px;padding:12px;font-size:14px;" onclick="previewEOD()">Preview Today's Totals</button>
+        <button class="btn-preview-eod" onclick="previewEOD()">Preview Today's Totals</button>
         <button class="btn-eod" id="btn-eod" onclick="submitEOD()" disabled>Finalize &amp; Add Summary to Sheet</button>
       </div>
       <div class="eod-done" id="eod-done">
         <div class="eod-icon">✅</div>
         <div class="eod-title">Day Finalized!</div>
-        <div class="eod-desc">The summary row has been added to today's sheet. See you tomorrow!</div>
+        <div class="eod-desc">The summary row has been added to today's sheet. Great work today!</div>
         <button class="btn-secondary-action" onclick="logout()" style="margin-top:16px;">Log Out</button>
       </div>
     </div>
@@ -297,24 +315,40 @@
 <div id="loading"><div class="spinner"></div><div class="loading-text" id="loading-text">Working…</div></div>
 
 <script>
-  // ── CONFIG ──────────────────────────────────────────────
-  // NOTE: Credentials are NOT stored here.
-  // They live safely inside Google Apps Script Properties.
   const GAS_URL = "https://script.google.com/macros/s/AKfycbzN5fU-Koo9OlVtSxRAOCdhd-skY6hiyo1gG9ysj_TPaWO6MojVPdEyWmKiFlCOCQMJMA/exec";
 
-  const FOOD_ITEMS  = ["cheese sticks","chicken ball","fish ball","fries","kikiam","paa","quail egg","tokwa","squid ball"];
-  const DRINK_ITEMS = ["mais con yelo","choco kisses","double dutch","melon","ube","buko pandan","mango"];
-  const ALL_ITEMS   = [...FOOD_ITEMS,...DRINK_ITEMS];
-  const DEFAULT_PRICES = [5,10,15,20];
+  // ── PER-ITEM PRICE CONFIG ─────────────────────────────────
+  const ITEM_CONFIG = [
+    { name:"cheese sticks",  category:"food",   prices:[5,10,15,20] },
+    { name:"chicken ball",   category:"food",   prices:[5,10,15,20] },
+    { name:"fish ball",      category:"food",   prices:[5,10,15,20] },
+    { name:"fries",          category:"food",   prices:[10,20,30]   },
+    { name:"kikiam",         category:"food",   prices:[5,10,15,20] },
+    { name:"paa",            category:"food",   prices:[7,20]       },
+    { name:"quail egg",      category:"food",   prices:[5,10,15,20] },
+    { name:"tokwa",          category:"food",   prices:[5,10,15,20] },
+    { name:"squid ball",     category:"food",   prices:[5,10,15,20] },
+    { name:"mais con yelo",  category:"drinks", prices:[15,20]      },
+    { name:"choco kisses",   category:"drinks", prices:[15,20]      },
+    { name:"double dutch",   category:"drinks", prices:[15,20]      },
+    { name:"melon",          category:"drinks", prices:[15,20]      },
+    { name:"ube",            category:"drinks", prices:[15,20]      },
+    { name:"buko pandan",    category:"drinks", prices:[15,20]      },
+    { name:"mango",          category:"drinks", prices:[15,20]      },
+  ];
 
-  const orderState = {}; // { key: [{price},...] }
+  const ALL_ITEMS   = ITEM_CONFIG.map(i => i.name);
+  const FOOD_ITEMS  = ITEM_CONFIG.filter(i => i.category==='food').map(i => i.name);
+  const DRINK_ITEMS = ITEM_CONFIG.filter(i => i.category==='drinks').map(i => i.name);
+
+  const orderState = {};
   let activeSheetName = "";
   let loggedInUser    = "";
 
-  // ── LOGIN ────────────────────────────────────────────────
+  // ── LOGIN ─────────────────────────────────────────────────
   async function handleLogin() {
-    const user = document.getElementById('login-user').value.trim();
-    const pass = document.getElementById('login-pass').value;
+    const user  = document.getElementById('login-user').value.trim();
+    const pass  = document.getElementById('login-pass').value;
     const errEl = document.getElementById('login-error');
     const btn   = document.getElementById('btn-login');
     if (!user || !pass) { errEl.textContent='Please enter username and password.'; return; }
@@ -333,12 +367,11 @@
       btn.disabled=false; btn.textContent='Log In';
     }
   }
-
   ['login-user','login-pass'].forEach(id => {
     document.getElementById(id).addEventListener('keydown', e => { if(e.key==='Enter') handleLogin(); });
   });
 
-  // ── WELCOME ──────────────────────────────────────────────
+  // ── WELCOME ───────────────────────────────────────────────
   async function showWelcome() {
     showScreen('welcome');
     document.getElementById('welcome-name').textContent = loggedInUser;
@@ -380,29 +413,32 @@
     document.getElementById('summary-date').textContent =
       new Date().toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric'});
     buildGrids(); updateSummary(); updateClock();
-    // Reset EOD state in case user navigated back
     document.getElementById('eod-main').classList.remove('hide');
     document.getElementById('eod-done').classList.remove('show');
     document.getElementById('btn-eod').disabled=true;
     document.getElementById('eod-preview').style.display='none';
   }
 
-  // ── ITEM CARDS ───────────────────────────────────────────
+  // ── ITEM CARD BUILDER ─────────────────────────────────────
   function buildItemCard(itemName) {
-    const key = itemName.replace(/\s+/g,'_');
+    const key    = itemName.replace(/\s+/g,'_');
+    const config = ITEM_CONFIG.find(i => i.name === itemName);
     orderState[key] = [];
+
     const card = document.createElement('div');
     card.className='item-card'; card.id=`card-${key}`;
 
     const badge = document.createElement('div');
     badge.className='amount-badge'; badge.id=`badge-${key}`;
 
-    const name = document.createElement('div');
-    name.className='item-name'; name.textContent=itemName;
+    const nameEl = document.createElement('div');
+    nameEl.className='item-name'; nameEl.textContent=itemName;
 
     const btnRow = document.createElement('div');
     btnRow.className='price-btns';
-    DEFAULT_PRICES.forEach(price => {
+
+    // Use this item's specific prices
+    config.prices.forEach(price => {
       const btn=document.createElement('button');
       btn.className='price-btn'; btn.textContent=`₱${price}`;
       btn.onclick=()=>addPriceEntry(key,price);
@@ -426,7 +462,7 @@
     const entriesEl=document.createElement('div');
     entriesEl.className='price-entries'; entriesEl.id=`entries-${key}`;
 
-    card.appendChild(badge); card.appendChild(name);
+    card.appendChild(badge); card.appendChild(nameEl);
     card.appendChild(btnRow); card.appendChild(customWrap); card.appendChild(entriesEl);
     return card;
   }
@@ -456,7 +492,7 @@
     });
   }
 
-  // ── ORDER SUMMARY ────────────────────────────────────────
+  // ── ORDER SUMMARY ─────────────────────────────────────────
   function updateSummary() {
     const list=document.getElementById('order-list');
     let total=0,count=0;
@@ -486,17 +522,16 @@
     });
   }
 
-  // ── SUBMIT ORDER ─────────────────────────────────────────
+  // ── SUBMIT ORDER ──────────────────────────────────────────
   async function submitOrder() {
-    const cashier=document.getElementById('cashier').value.trim();
     const customer=document.getElementById('customer').value.trim();
-    if(!cashier){showToast('Please enter cashier name.',true);return;}
     const itemCells=ALL_ITEMS.map(name=>{
       const key=name.replace(/\s+/g,'_');
       const entries=orderState[key]||[];
-      if(entries.length===0)return 0;
+      if(entries.length===0) return 0;
       const grouped=entries.reduce((acc,e)=>{acc[e.price]=(acc[e.price]||0)+1;return acc;},{});
-      return Object.entries(grouped).map(([p,q])=>`${q}x₱${p}`).join(',');
+      // Store as "2x10,1x5" — plain numbers, no ₱ symbol to avoid parse issues
+      return Object.entries(grouped).map(([p,q])=>`${q}x${p}`).join(',');
     });
     const total=ALL_ITEMS.reduce((s,name)=>{
       const key=name.replace(/\s+/g,'_');
@@ -507,7 +542,7 @@
       const res=await callGAS({
         action:'addOrder', sheetName:activeSheetName,
         timestamp:new Date().toLocaleString('en-PH',{timeZone:'Asia/Manila'}),
-        cashier, customer:customer||'—', items:itemCells, total
+        customer:customer||'—', items:itemCells, total
       });
       showLoading(false);
       if(res.success){showToast('✓ Order saved!');clearAll();}
@@ -515,51 +550,129 @@
     } catch(e){showLoading(false);showToast('Error saving order.',true);}
   }
 
-  // ── EDIT ORDER ───────────────────────────────────────────
-  async function fetchRow() {
-    const rowNum=parseInt(document.getElementById('edit-row-num').value);
-    if(!rowNum||rowNum<2){showToast('Enter a valid row number (2 or above).',true);return;}
-    showLoading(true,'Fetching row…');
+  // ── EDIT ORDERS: LOAD ALL ─────────────────────────────────
+  async function loadAllOrders() {
+    showLoading(true,'Loading today\'s orders…');
     try {
-      const res=await callGAS({action:'getRow',sheetName:activeSheetName,rowNum});
+      const res=await callGAS({action:'getAllOrders',sheetName:activeSheetName});
       showLoading(false);
-      if(!res.success||!res.row){showToast('Row not found.',true);return;}
-      renderEditTable(res.row,rowNum);
-    } catch(e){showLoading(false);showToast('Error fetching row.',true);}
+      renderAllOrders(res.orders||[]);
+    } catch(e){showLoading(false);showToast('Error loading orders.',true);}
   }
 
-  function renderEditTable(row,rowNum) {
-    const headers=['Timestamp','Cashier','Customer',...ALL_ITEMS,'TOTAL'];
-    const container=document.getElementById('edit-table-container');
-    let html=`<div class="edit-table-wrap"><table class="edit-table"><thead><tr><th>#</th>
-      ${headers.map(h=>`<th>${h}</th>`).join('')}<th>Action</th>
-    </tr></thead><tbody><tr><td style="color:var(--muted)">${rowNum}</td>
-      ${row.map((cell,i)=>{
-        if(i===0) return `<td style="color:var(--muted);font-size:11px;">${cell}</td>`;
-        return `<td class="editable-cell"><input type="text" value="${cell}" id="ec-${i}" /></td>`;
-      }).join('')}
-      <td><button class="btn-save-row" onclick="saveRow(${rowNum},${row.length})">Save</button></td>
-    </tr></tbody></table></div>
-    <p style="font-size:12px;color:var(--muted);margin-top:10px;">Edit any cell. For multi-price items, use format like <code>2x₱10,1x₱5</code>. Click Save.</p>`;
-    container.innerHTML=html;
-  }
-
-  async function saveRow(rowNum,colCount) {
-    const cells=[];
-    for(let i=0;i<colCount;i++){
-      const inp=document.getElementById(`ec-${i}`);
-      cells.push(inp?inp.value:'');
+  function renderAllOrders(orders) {
+    const container=document.getElementById('edit-orders-container');
+    if(orders.length===0){
+      container.innerHTML='<div class="edit-empty">No orders found for today yet.</div>';
+      return;
     }
+    container.innerHTML='';
+    const list=document.createElement('div');
+    list.className='edit-orders-list';
+
+    orders.forEach(order => {
+      const card=document.createElement('div');
+      card.className='edit-order-card';
+
+      // Build item summary for the collapsed header (only non-zero items)
+      const itemSummary = ALL_ITEMS
+        .map((name,i)=>({name,val:order.items[i]}))
+        .filter(x=>x.val&&x.val!=='0'&&x.val!==0)
+        .map(x=>`${x.name}: ${x.val}`)
+        .join(' · ') || 'No items';
+
+      card.innerHTML=`
+        <div class="edit-order-card-header" onclick="toggleEditCard(this)">
+          <div class="edit-order-meta">
+            <span class="edit-order-row-num">Row ${order.rowNum}</span>
+            <span class="edit-order-time">${order.timestamp}</span>
+            <span class="edit-order-customer">${order.customer!=='—'?order.customer:''}</span>
+          </div>
+          <span class="edit-order-total">₱${order.total}</span>
+        </div>
+        <div class="edit-order-body" id="body-${order.rowNum}">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">${itemSummary}</div>
+          <div class="edit-items-grid" id="fields-${order.rowNum}"></div>
+          <div class="edit-action-row">
+            <button class="btn-save-edit" onclick="saveEditedOrder(${order.rowNum})">Save Changes</button>
+            <button class="btn-delete-edit" onclick="deleteOrder(${order.rowNum})">Delete Order</button>
+          </div>
+        </div>`;
+
+      // Build editable fields for each item
+      list.appendChild(card);
+
+      // Populate item fields after appending (so DOM exists)
+      setTimeout(()=>{
+        const fieldsEl=document.getElementById(`fields-${order.rowNum}`);
+        if(!fieldsEl) return;
+        ALL_ITEMS.forEach((name,i)=>{
+          const wrap=document.createElement('div');
+          wrap.className='edit-item-field';
+          wrap.innerHTML=`<label class="edit-item-label">${name}</label>
+            <input class="edit-item-input" type="text" 
+              id="ef-${order.rowNum}-${i}" 
+              value="${order.items[i]||''}" 
+              placeholder="0" />`;
+          fieldsEl.appendChild(wrap);
+        });
+      },0);
+    });
+
+    container.appendChild(list);
+  }
+
+  function toggleEditCard(header) {
+    const body=header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+
+  async function saveEditedOrder(rowNum) {
+    const newItems=ALL_ITEMS.map((_,i)=>{
+      const inp=document.getElementById(`ef-${rowNum}-${i}`);
+      return inp?inp.value.trim():'0';
+    });
+    // Recalculate total from edited fields
+    const newTotal=newItems.reduce((s,v)=>s+parseAmountClient(v),0);
     showLoading(true,'Saving changes…');
     try {
-      const res=await callGAS({action:'updateRow',sheetName:activeSheetName,rowNum,cells});
+      const res=await callGAS({action:'updateOrder',sheetName:activeSheetName,rowNum,items:newItems,total:newTotal});
       showLoading(false);
-      if(res.success)showToast('✓ Row updated!');
+      if(res.success){showToast('✓ Order updated!');loadAllOrders();}
       else throw new Error(res.error);
-    } catch(e){showLoading(false);showToast('Error updating.',true);}
+    } catch(e){showLoading(false);showToast('Error saving.',true);}
   }
 
-  // ── END OF DAY ───────────────────────────────────────────
+  async function deleteOrder(rowNum) {
+    if(!confirm(`Delete Row ${rowNum}? This cannot be undone.`)) return;
+    showLoading(true,'Deleting order…');
+    try {
+      const res=await callGAS({action:'deleteOrder',sheetName:activeSheetName,rowNum});
+      showLoading(false);
+      if(res.success){showToast('Order deleted.');loadAllOrders();}
+      else throw new Error(res.error);
+    } catch(e){showLoading(false);showToast('Error deleting.',true);}
+  }
+
+  // Client-side amount parser (mirrors server)
+  function parseAmountClient(val) {
+    if(!val||val==='0'||val===0) return 0;
+    const str=String(val).trim();
+    let total=0;
+    str.split(',').forEach(part=>{
+      part=part.trim();
+      // Matches "2x10", "2x₱10", "2X10", etc.
+      const m=part.match(/^(\d+)[xX×]\s*[₱]?\s*(\d+(?:\.\d+)?)$/);
+      if(m){ total+=parseInt(m[1])*parseFloat(m[2]); }
+      else {
+        const n=parseFloat(part.replace(/[₱\s]/g,''));
+        if(!isNaN(n)) total+=n;
+      }
+    });
+    return total;
+  }
+
+  // ── END OF DAY ────────────────────────────────────────────
   async function previewEOD() {
     showLoading(true,'Calculating totals…');
     try {
@@ -579,7 +692,7 @@
       });
       const gr=document.createElement('div');
       gr.className='eod-preview-row';
-      gr.innerHTML=`<span>GRAND TOTAL</span><span>₱${res.grandTotal}</span>`;
+      gr.innerHTML=`<span>Grand Total</span><span>₱${res.grandTotal}</span>`;
       rowsEl.appendChild(gr);
       document.getElementById('btn-eod').disabled=false;
     } catch(e){showLoading(false);showToast('Error.',true);}
@@ -598,10 +711,9 @@
     } catch(e){showLoading(false);showToast('Error finalizing.',true);}
   }
 
-  // ── UTILITIES ────────────────────────────────────────────
+  // ── UTILITIES ─────────────────────────────────────────────
   function clearAll() {
     ALL_ITEMS.forEach(name=>{const key=name.replace(/\s+/g,'_');orderState[key]=[];renderEntries(key);});
-    document.getElementById('cashier').value='';
     document.getElementById('customer').value='';
     updateSummary();
   }
