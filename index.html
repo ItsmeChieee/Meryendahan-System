@@ -11,8 +11,68 @@
     :root {
       --bg:#0f0f0f;--surface:#1a1a1a;--surface2:#242424;--border:#2e2e2e;
       --accent:#f5a623;--text:#f0ede6;--muted:#888;
+      --accent-hover:#ffb83f;--accent-text:#000;
+      --active-tint:#1e1a10;
       --success:#4caf82;--danger:#e84444;--info:#4a9eff;--warning:#f5a623;--radius:12px;
     }
+
+    /* ── THEME DEFINITIONS ── */
+    /* Applied via JS to :root — localStorage key: st_theme */
+
+    /* ── THEME PANEL ── */
+    #theme-overlay {
+      display:none; position:fixed; inset:0; z-index:500;
+      background:rgba(0,0,0,.6);
+      align-items:center; justify-content:center;
+    }
+    #theme-overlay.open { display:flex; }
+    #theme-panel {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:20px; padding:28px 28px 24px;
+      width:min(560px,94vw); max-height:90vh; overflow-y:auto;
+    }
+    .theme-panel-header {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:20px;
+    }
+    .theme-panel-title {
+      font-family:'Syne',sans-serif; font-weight:800; font-size:17px;
+    }
+    .theme-panel-close {
+      background:transparent; border:1px solid var(--border);
+      color:var(--muted); border-radius:8px; padding:5px 12px;
+      font-size:12px; cursor:pointer; transition:all .15s;
+    }
+    .theme-panel-close:hover { border-color:var(--danger); color:var(--danger); }
+    .theme-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+    }
+    .theme-swatch {
+      border-radius:14px; overflow:hidden;
+      border:2px solid transparent;
+      cursor:pointer; transition:transform .15s, border-color .15s;
+    }
+    .theme-swatch:hover { transform:translateY(-2px); }
+    .theme-swatch.active { border-color:var(--accent); }
+    .ts-preview {
+      padding:10px 12px 8px;
+    }
+    .ts-logo { font-size:11px; font-weight:800; margin-bottom:7px; }
+    .ts-bars { display:flex; flex-direction:column; gap:4px; }
+    .ts-bar { height:7px; border-radius:3px; opacity:.9; }
+    .ts-btn { margin-top:8px; width:100%; padding:5px 0; border-radius:6px; font-size:9px; font-weight:800; border:none; cursor:default; }
+    .ts-footer { padding:5px 12px 8px; }
+    .ts-name { font-size:11px; font-weight:700; }
+    .ts-desc { font-size:10px; opacity:.6; margin-top:1px; }
+
+    /* ── THEME ICON BTN in header ── */
+    .btn-theme {
+      background:transparent; border:1px solid var(--border);
+      color:var(--muted); border-radius:8px;
+      padding:5px 10px; font-size:14px; cursor:pointer;
+      transition:all .15s; line-height:1;
+    }
+    .btn-theme:hover { border-color:var(--accent); color:var(--accent); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow: hidden; }
 
@@ -32,7 +92,7 @@
     .login-field input:focus { outline: none; border-color: var(--accent); }
     .login-error { color: var(--danger); font-size: 13px; margin-bottom: 12px; min-height: 18px; }
     .btn-login { width: 100%; padding: 14px; background: var(--accent); color: #000; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; transition: all .2s; margin-top: 4px; }
-    .btn-login:hover { background: #ffb83f; }
+    .btn-login:hover { background: var(--accent-hover); }
     .btn-login:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
 
     /* ── WELCOME ── */
@@ -44,7 +104,7 @@
     .welcome-sheet-note strong { color: var(--success); }
     .welcome-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .btn-start-day { padding: 18px 48px; background: var(--accent); color: #000; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; border: none; border-radius: 14px; cursor: pointer; transition: all .2s; }
-    .btn-start-day:hover { background: #ffb83f; transform: translateY(-2px); }
+    .btn-start-day:hover { background: var(--accent-hover); transform: translateY(-2px); }
     .btn-start-day:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
     .btn-secondary-action { padding: 12px 28px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all .2s; }
     .btn-secondary-action:hover { border-color: var(--text); color: var(--text); }
@@ -57,7 +117,7 @@
     .nav-center { display: flex; gap: 4px; }
     .nav-btn { padding: 7px 16px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; border: 1px solid transparent; border-radius: 8px; cursor: pointer; transition: all .15s; }
     .nav-btn:hover { color: var(--text); background: var(--surface2); }
-    .nav-btn.active { color: var(--accent); border-color: var(--accent); background: #1e1a10; }
+    .nav-btn.active { color: var(--accent); border-color: var(--accent); background: var(--active-tint); }
     .nav-btn.danger:hover { color: var(--danger); border-color: var(--danger); }
     .header-right { display: flex; align-items: center; gap: 12px; }
     #clock { font-size: 12px; color: var(--muted); }
@@ -90,7 +150,7 @@
     .cat-line { flex: 1; height: 1px; background: var(--border); }
     .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; align-items: stretch; }
     .item-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; position: relative; transition: border-color .2s; display: flex; flex-direction: column; }
-    .item-card.has-value { border-color: var(--accent); background: #1e1a10; }
+    .item-card.has-value { border-color: var(--accent); background: var(--active-tint); }
     .item-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; margin-bottom: 8px; text-transform: capitalize; }
     .price-btns { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
     .price-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--muted); cursor: pointer; transition: all .15s; }
@@ -172,7 +232,7 @@
     .grand-total-value { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 26px; color: var(--accent); }
     .submit-area { padding: 12px 18px 16px; background: var(--surface); border-top: 1px solid var(--border); }
     .btn-submit { width: 100%; padding: 14px; background: var(--accent); color: #000; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; border: none; border-radius: var(--radius); cursor: pointer; transition: all .2s; }
-    .btn-submit:hover { background: #ffb83f; }
+    .btn-submit:hover { background: var(--accent-hover); }
     .btn-submit:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
     .btn-clear { width: 100%; padding: 9px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; margin-top: 6px; transition: all .2s; }
     .btn-clear:hover { border-color: var(--danger); color: var(--danger); }
@@ -191,7 +251,7 @@
     .order-sidebar-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
     .sidebar-order-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; cursor: pointer; transition: all .15s; }
     .sidebar-order-item:hover { border-color: var(--accent); }
-    .sidebar-order-item.active { border-color: var(--accent); background: #1e1a10; }
+    .sidebar-order-item.active { border-color: var(--accent); background: var(--active-tint); }
     .soi-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
     .soi-id { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; color: var(--accent); }
     .soi-total { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent); }
@@ -209,7 +269,7 @@
     .edit-form-content.visible { display: grid; }
     .edit-items-panel { overflow-y: auto; padding: 20px; border-right: 1px solid var(--border); }
     .edit-top-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-    .edit-order-id-badge { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent); background: #1e1a10; border: 1px solid var(--accent); border-radius: 6px; padding: 3px 10px; }
+    .edit-order-id-badge { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent); background: var(--active-tint); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 10px; }
     .edit-top-bar .field { flex: 1; min-width: 180px; margin: 0; }
     .btn-close-edit { margin-left: auto; flex-shrink: 0; background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 6px 14px; font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 6px; }
     .btn-close-edit:hover { border-color: var(--danger); color: var(--danger); }
@@ -289,7 +349,7 @@
       border-bottom: 1px solid var(--border);
     }
     .bs-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; }
-    .bs-order-badge { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; color: var(--accent); background: #1e1a10; border: 1px solid var(--accent); border-radius: 6px; padding: 3px 10px; }
+    .bs-order-badge { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; color: var(--accent); background: var(--active-tint); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 10px; }
     .bs-close {
       background: transparent; border: 1px solid var(--border);
       color: var(--muted); border-radius: 8px; padding: 6px 14px;
@@ -406,13 +466,92 @@
       #tab-edit { overflow: hidden; }
     }
 
-    /* ── VERY SMALL  <400px ── */
+    /* ── PAYMENT METHOD BUTTONS ── */
+    .method-btns { display:flex; gap:6px; }
+    .method-btn {
+      flex:1; padding:7px 4px;
+      font-family:'Syne',sans-serif; font-weight:700; font-size:11px;
+      border-radius:8px; border:1px solid var(--border);
+      background:transparent; color:var(--muted);
+      cursor:pointer; transition:all .15s;
+    }
+    .method-btn:hover { border-color:var(--text); color:var(--text); }
+    .method-btn.active-method { border-color:var(--info); background:#0a1a2a; color:var(--info); }
+    .method-badge {
+      font-family:'Syne',sans-serif; font-weight:700; font-size:10px;
+      padding:2px 7px; border-radius:4px;
+    }
+    .mb-cash  { background:#1a1a1a; color:var(--muted);   border:1px solid var(--border); }
+    .mb-gcash { background:#0a1a2e; color:var(--info);    border:1px solid #1a3a5a; }
+    .mb-maya  { background:#1a0a2a; color:#c084fc;        border:1px solid #3a1a5a; }
+
+    /* ── UTANG TAB ── */
+    .utang-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid var(--border); flex-shrink:0; }
+    .utang-title  { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; }
+    .utang-sub    { font-size:12px; color:var(--muted); margin-top:2px; }
+    .utang-stats  { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:14px 20px; flex-shrink:0; }
+    .ustat-card   { background:var(--surface2); border-radius:var(--radius); padding:12px 14px; }
+    .ustat-label  { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+    .ustat-val    { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; }
+    .danger-val   { color:var(--danger); }
+    .utang-list   { flex:1; overflow-y:auto; padding:10px 16px 20px; display:flex; flex-direction:column; gap:8px; }
+    .utang-card   {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:14px 16px;
+      border-left:3px solid var(--danger);
+    }
+    .utang-card.partial-card { border-left-color:var(--warning); }
+    .utang-card-top    { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; }
+    .utang-card-left   { display:flex; flex-direction:column; gap:3px; }
+    .utang-card-name   { font-family:'Syne',sans-serif; font-weight:700; font-size:14px; }
+    .utang-card-meta   { font-size:11px; color:var(--muted); }
+    .utang-card-right  { text-align:right; }
+    .utang-card-total  { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; color:var(--danger); }
+    .utang-card.partial-card .utang-card-total { color:var(--warning); }
+    .utang-card-badges { display:flex; gap:5px; margin-top:4px; flex-wrap:wrap; justify-content:flex-end; }
+    .utang-card-actions { display:flex; gap:6px; margin-top:10px; }
+    .btn-mark-paid {
+      flex:1; padding:8px; background:var(--success); color:#000;
+      font-family:'Syne',sans-serif; font-weight:800; font-size:12px;
+      border:none; border-radius:8px; cursor:pointer; transition:opacity .15s;
+    }
+    .btn-mark-paid:hover { opacity:.85; }
+    .utang-sheet-label {
+      font-size:10px; text-transform:uppercase; letter-spacing:.08em;
+      color:var(--muted); padding:6px 0 4px; margin-top:6px;
+    }
+
+    /* ── END-OF-DAY TAB ── */
+    .eod-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid var(--border); flex-shrink:0; }
+    .eod-title  { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; }
+    .eod-sub    { font-size:12px; color:var(--muted); margin-top:2px; }
+    .eod-body   { flex:1; overflow-y:auto; padding:16px 20px 24px; }
+    .eod-stats  { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-bottom:20px; }
+    .eod-stat   { background:var(--surface2); border-radius:var(--radius); padding:14px; }
+    .eod-stat-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+    .eod-stat-val   { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; }
+    .eod-section-title {
+      font-family:'Syne',sans-serif; font-weight:700; font-size:12px;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      margin:18px 0 10px;
+    }
+    .eod-method-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:8px; }
+    .eod-method-card { background:var(--surface2); border-radius:var(--radius); padding:12px 14px; text-align:center; }
+    .eod-method-name { font-size:11px; color:var(--muted); margin-bottom:4px; }
+    .eod-method-val  { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; }
+    .eod-items-list  { display:flex; flex-direction:column; gap:6px; }
+    .eod-item-row    { display:flex; align-items:center; gap:10px; }
+    .eod-item-bar-wrap { flex:1; background:var(--surface2); border-radius:4px; height:8px; overflow:hidden; }
+    .eod-item-bar    { height:100%; background:var(--accent); border-radius:4px; transition:width .4s ease; }
+    .eod-item-name   { font-size:12px; width:110px; flex-shrink:0; text-transform:capitalize; color:var(--text); }
+    .eod-item-val    { font-family:'Syne',sans-serif; font-weight:700; font-size:12px; width:46px; text-align:right; flex-shrink:0; }
+
+    /* Responsive nav on small screens */
+    @media (max-width: 767px) {
+      .nav-btn { padding:4px 8px; font-size:10px; }
+    }
     @media (max-width: 399px) {
-      .items-grid { grid-template-columns: 1fr 1fr; gap: 5px; }
-      .nav-btn { padding: 4px 7px; font-size: 10px; }
-      .grand-total-value { font-size: 20px; }
-      .btn-save-changes, .btn-submit { font-size: 13px; }
-      .edit-orders-grid { grid-template-columns: 1fr; }
+      .nav-btn { padding:4px 6px; font-size:9px; }
     }
   </style>
 </head>
@@ -455,11 +594,14 @@
     <div class="logo">Sales<span>Tracker</span></div>
     <div class="nav-center">
       <button class="nav-btn active" id="nav-order" onclick="switchTab('order', this)">New Order</button>
-      <button class="nav-btn" id="nav-edit" onclick="switchTab('edit', this)">Edit Orders</button>
+      <button class="nav-btn" id="nav-edit"  onclick="switchTab('edit', this)">Edit Orders</button>
+      <button class="nav-btn" id="nav-utang" onclick="switchTab('utang', this)">Utang</button>
+      <button class="nav-btn" id="nav-eod"   onclick="switchTab('eod', this)">End of Day</button>
     </div>
     <div class="header-right">
       <span id="active-sheet-badge"></span>
       <span id="clock"></span>
+      <button class="btn-theme" onclick="openThemePanel()" title="Change theme">🎨</button>
       <button class="nav-btn danger" onclick="logout()">Log Out</button>
     </div>
   </header>
@@ -498,7 +640,7 @@
             <span class="grand-total-value" id="grand-total">₱0</span>
           </div>
         </div>
-        <!-- Payment Status selector for new order -->
+        <!-- Payment Status + Method selector for new order -->
         <div class="payment-block">
           <div class="payment-label">Payment Status</div>
           <div class="payment-btns">
@@ -510,6 +652,12 @@
             <label>Amount paid ₱</label>
             <input type="number" id="partial-amount" min="0" placeholder="0" oninput="onPartialInput()" />
             <span class="of-total" id="partial-of-total">of ₱0</span>
+          </div>
+          <div class="payment-label" style="margin-top:10px;">Payment Method</div>
+          <div class="method-btns" id="method-btns">
+            <button class="method-btn active-method" id="method-btn-cash-"  onclick="setMethod('Cash','')">Cash</button>
+            <button class="method-btn"               id="method-btn-gcash-" onclick="setMethod('GCash','')">GCash</button>
+            <button class="method-btn"               id="method-btn-maya-"  onclick="setMethod('Maya','')">Maya</button>
           </div>
         </div>
         <div class="submit-area">
@@ -598,6 +746,12 @@
                   <input type="number" id="edit-partial-amount" min="0" placeholder="0" oninput="onPartialInput('edit')" />
                   <span class="of-total" id="edit-partial-of-total">of ₱0</span>
                 </div>
+                <div class="payment-label" style="margin-top:10px;">Payment Method</div>
+                <div class="method-btns">
+                  <button class="method-btn active-method" id="method-btn-cash-edit"  onclick="setMethod('Cash','edit')">Cash</button>
+                  <button class="method-btn"               id="method-btn-gcash-edit" onclick="setMethod('GCash','edit')">GCash</button>
+                  <button class="method-btn"               id="method-btn-maya-edit"  onclick="setMethod('Maya','edit')">Maya</button>
+                </div>
               </div>
               <div class="edit-action-area">
                 <button class="btn-save-changes" id="btn-save-changes" onclick="saveCurrentEdit()">Save Changes</button>
@@ -608,6 +762,38 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- TAB: UTANG TRACKER -->
+    <div id="tab-utang" class="tab-page" style="flex-direction:column;overflow:hidden;">
+      <div class="utang-header">
+        <div>
+          <div class="utang-title">Utang Tracker</div>
+          <div class="utang-sub" id="utang-sub">All unpaid &amp; partial orders across every day</div>
+        </div>
+        <button class="btn-refresh" style="width:auto;padding:8px 16px;" onclick="loadUtang(true)">↻ Refresh</button>
+      </div>
+      <div class="utang-stats" id="utang-stats" style="display:none;">
+        <div class="ustat-card"><div class="ustat-label">Outstanding orders</div><div class="ustat-val" id="utang-count">0</div></div>
+        <div class="ustat-card"><div class="ustat-label">Total owed</div><div class="ustat-val danger-val" id="utang-total">₱0</div></div>
+      </div>
+      <div class="utang-list" id="utang-list">
+        <div class="sidebar-empty" style="padding:48px 0;">Tap Refresh to load all outstanding balances.</div>
+      </div>
+    </div>
+
+    <!-- TAB: END OF DAY -->
+    <div id="tab-eod" class="tab-page" style="flex-direction:column;overflow:hidden;">
+      <div class="eod-header">
+        <div>
+          <div class="eod-title">End of Day</div>
+          <div class="eod-sub" id="eod-sub">Summary for <span id="eod-sheet-name">—</span></div>
+        </div>
+        <button class="btn-refresh" style="width:auto;padding:8px 16px;" onclick="loadEOD()">↻ Refresh</button>
+      </div>
+      <div class="eod-body" id="eod-body">
+        <div class="sidebar-empty" style="padding:48px 0;">Tap Refresh to generate today's summary.</div>
+      </div>
     </div>
 
   </div><!-- /pos-body -->
@@ -659,12 +845,29 @@
           <input type="number" id="bs-partial-amount" min="0" placeholder="0" oninput="onPartialInput('bs')" />
           <span class="of-total" id="bs-partial-of-total">of ₱0</span>
         </div>
+        <div class="payment-label" style="margin-top:10px;">Payment Method</div>
+        <div class="method-btns">
+          <button class="method-btn active-method" id="method-btn-cash-bs"  onclick="setMethod('Cash','bs')">Cash</button>
+          <button class="method-btn"               id="method-btn-gcash-bs" onclick="setMethod('GCash','bs')">GCash</button>
+          <button class="method-btn"               id="method-btn-maya-bs"  onclick="setMethod('Maya','bs')">Maya</button>
+        </div>
       </div>
       <div class="bs-actions">
         <button class="bs-btn-save" onclick="saveMobileEdit()">Save Changes</button>
         <button class="bs-btn-delete" onclick="deleteMobileOrder()">🗑 Delete</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ── THEME PANEL ── -->
+<div id="theme-overlay" onclick="handleThemeOverlayClick(event)">
+  <div id="theme-panel">
+    <div class="theme-panel-header">
+      <div class="theme-panel-title">Choose a Theme</div>
+      <button class="theme-panel-close" onclick="closeThemePanel()">✕ Close</button>
+    </div>
+    <div class="theme-grid" id="theme-grid"></div>
   </div>
 </div>
 
@@ -675,7 +878,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
 // ── CONFIG ────────────────────────────────────────────────
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwvA9F8VIQnztIy2m4fpf1oqdP_dxR92a2_5aPeBS0_Ko-owYowhhKSA6KZNiWToVgesA/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbx7k26PaU7O2PCP4oiSakYvRj-woReXJUMp-A7RUvRPclnVIwkhYjWk7Zhe07AuH-esnQ/exec";
 
 // ── ITEM CONFIG ───────────────────────────────────────────
 const ITEM_CONFIG = [
@@ -714,7 +917,8 @@ let allOrders        = null;
 
 // Payment state: 'unpaid' | 'partial' | 'paid'
 // Context: '' = new order, 'edit' = edit form, 'bs' = bottom sheet
-let paymentState = { '': 'unpaid', 'edit': 'unpaid', 'bs': 'unpaid' };
+let paymentState  = { '': 'unpaid', 'edit': 'unpaid', 'bs': 'unpaid' };
+let methodState   = { '': 'Cash',   'edit': 'Cash',   'bs': 'Cash'   };
 
 // ═══════════════════════════════════════════════════════
 //  PAYMENT STATUS HELPERS
@@ -805,6 +1009,27 @@ function paymentBadgeHtml(savedValue) {
   return `<span class="payment-status-badge psb-unpaid">Unpaid</span>`;
 }
 
+// ── PAYMENT METHOD HELPERS ────────────────────────────────────
+function setMethod(method, ctx) {
+  methodState[ctx] = method;
+  const suffix = ctx ? `-${ctx}` : '-';
+  ['Cash','GCash','Maya'].forEach(m => {
+    const btn = document.getElementById(`method-btn-${m.toLowerCase()}${suffix}`);
+    if (!btn) return;
+    btn.className = 'method-btn' + (methodState[ctx] === m ? ' active-method' : '');
+  });
+}
+
+function restoreMethodState(ctx, savedMethod) {
+  setMethod(savedMethod && ['Cash','GCash','Maya'].includes(savedMethod) ? savedMethod : 'Cash', ctx);
+}
+
+function methodBadgeHtml(method) {
+  if (method === 'GCash') return `<span class="method-badge mb-gcash">GCash</span>`;
+  if (method === 'Maya')  return `<span class="method-badge mb-maya">Maya</span>`;
+  return `<span class="method-badge mb-cash">Cash</span>`;
+}
+
 // ═══════════════════════════════════════════════════════
 //  LOGIN
 // ═══════════════════════════════════════════════════════
@@ -890,8 +1115,9 @@ function launchPOS() {
   buildEditGrids();
   updateSummary();
   updateClock();
-  // Default new order payment to Unpaid
+  // Default new order payment to Unpaid / Cash
   setPayment('unpaid', '');
+  setMethod('Cash', '');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1047,10 +1273,12 @@ async function submitOrder() {
   },0);
 
   const paymentStatus = buildPaymentStatusValue('');
+  const paymentMethod = methodState[''] || 'Cash';
 
   // ── OPTIMISTIC: clear UI instantly ──
   const snapshot = JSON.parse(JSON.stringify(orderState));
   const snapshotPayment = paymentState[''];
+  const snapshotMethod  = methodState[''];
   clearAll();
   showToast(`⏳ Saving ${orderId}…`);
 
@@ -1063,28 +1291,30 @@ async function submitOrder() {
       customer:customer||'—',
       items:itemCells,
       total,
-      paymentStatus
+      paymentStatus,
+      paymentMethod
     });
     if(res.success){
       showToast(`✓ ${orderId} saved!`);
       allOrders=null;
     } else {
-      rollbackOrderState(snapshot, snapshotPayment);
+      rollbackOrderState(snapshot, snapshotPayment, snapshotMethod);
       showToast('Save failed — order restored.',true);
     }
   } catch(e){
-    rollbackOrderState(snapshot, snapshotPayment);
+    rollbackOrderState(snapshot, snapshotPayment, snapshotMethod);
     showToast('Connection error — order restored.',true);
   }
 }
 
-function rollbackOrderState(snapshot, snapshotPayment) {
+function rollbackOrderState(snapshot, snapshotPayment, snapshotMethod) {
   ALL_ITEMS.forEach(name=>{
     const key=name.replace(/\s+/g,'_');
     orderState[key]=snapshot[key]||[];
     renderEntries(key,orderState,updateSummary,'');
   });
   if (snapshotPayment) setPayment(snapshotPayment, '');
+  if (snapshotMethod)  setMethod(snapshotMethod, '');
   updateSummary();
 }
 
@@ -1133,7 +1363,7 @@ function renderSidebar(orders) {
       </div>
       <div class="soi-customer">${custDisplay}</div>
       <div class="soi-time">${order.timestamp||''}</div>
-      <div class="soi-payment">${paymentBadgeHtml(order.paymentStatus)}</div>`;
+      <div class="soi-payment" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">${paymentBadgeHtml(order.paymentStatus)} ${methodBadgeHtml(order.paymentMethod)}</div>`;
     list.appendChild(item);
   });
 }
@@ -1169,7 +1399,7 @@ function renderMobileGrid(orders) {
       <div class="ogc-customer">${custDisplay}</div>
       <div class="ogc-time">${order.timestamp||''}</div>
       ${itemsPreview?`<div class="ogc-items">${itemsPreview}</div>`:''}
-      <div class="ogc-payment">${paymentBadgeHtml(order.paymentStatus)}</div>
+      <div class="ogc-payment" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;">${paymentBadgeHtml(order.paymentStatus)} ${methodBadgeHtml(order.paymentMethod)}</div>
       <span class="ogc-edit-hint">tap to edit</span>`;
     grid.appendChild(card);
   });
@@ -1212,8 +1442,9 @@ function openMobileSheet(rowNum) {
     renderEntries(item.replace(/\s+/g,'_'),bsState,updateBsSummary,'bs-');
   });
 
-  // Restore payment status
+  // Restore payment status + method
   restorePaymentState('bs', order.paymentStatus);
+  restoreMethodState('bs', order.paymentMethod);
   updateBsSummary();
 
   const scroll = document.getElementById('bs-items-scroll');
@@ -1307,20 +1538,21 @@ async function saveMobileEdit(){
     return s+(bsState[name.replace(/\s+/g,'_')]||[]).reduce((ss,e)=>ss+e.price,0);
   },0);
   const newPaymentStatus = buildPaymentStatusValue('bs');
+  const newPaymentMethod = methodState['bs'] || 'Cash';
 
   const rowNum=bsRowNum;
   const orderIndex=allOrders?allOrders.findIndex(o=>o.rowNum===rowNum):-1;
   let oldOrder=null;
   if(orderIndex>=0){
     oldOrder=JSON.parse(JSON.stringify(allOrders[orderIndex]));
-    allOrders[orderIndex]={...allOrders[orderIndex],customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus};
+    allOrders[orderIndex]={...allOrders[orderIndex],customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus,paymentMethod:newPaymentMethod};
     renderMobileGrid(allOrders);
     renderSidebar(allOrders);
   }
   closeMobileSheet();
   showToast('⏳ Saving…');
   try {
-    const res=await callGAS({action:'updateOrder',sheetName:activeSheetName,rowNum,customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus});
+    const res=await callGAS({action:'updateOrder',sheetName:activeSheetName,rowNum,customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus,paymentMethod:newPaymentMethod});
     if(res.success){ showToast('✓ Order updated!'); }
     else {
       if(oldOrder&&orderIndex>=0) allOrders[orderIndex]=oldOrder;
@@ -1401,8 +1633,9 @@ function openEditForm(rowNum) {
     renderEntries(item.replace(/\s+/g,'_'),editState,updateEditSummary,'edit-');
   });
 
-  // Restore payment status
+  // Restore payment status + method
   restorePaymentState('edit', order.paymentStatus);
+  restoreMethodState('edit', order.paymentMethod);
   updateEditSummary();
 }
 
@@ -1473,6 +1706,7 @@ async function saveCurrentEdit() {
   },0);
 
   const newPaymentStatus = buildPaymentStatusValue('edit');
+  const newPaymentMethod = methodState['edit'] || 'Cash';
 
   // ── OPTIMISTIC ──
   const rowNum=currentEditRow;
@@ -1480,7 +1714,7 @@ async function saveCurrentEdit() {
   let oldOrder=null;
   if(orderIndex>=0){
     oldOrder=JSON.parse(JSON.stringify(allOrders[orderIndex]));
-    allOrders[orderIndex]={...allOrders[orderIndex],customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus};
+    allOrders[orderIndex]={...allOrders[orderIndex],customer:newCustomer,items:newItems,total:newTotal,paymentStatus:newPaymentStatus,paymentMethod:newPaymentMethod};
     renderSidebar(allOrders);
     const soi=document.getElementById(`soi-${rowNum}`);
     if(soi) soi.classList.add('active');
@@ -1495,7 +1729,8 @@ async function saveCurrentEdit() {
       customer:newCustomer,
       items:newItems,
       total:newTotal,
-      paymentStatus:newPaymentStatus
+      paymentStatus:newPaymentStatus,
+      paymentMethod:newPaymentMethod
     });
     if(res.success){
       showToast('✓ Order updated!');
@@ -1552,6 +1787,7 @@ function clearAll() {
   });
   document.getElementById('customer').value='';
   setPayment('unpaid', '');
+  setMethod('Cash', '');
   updateSummary();
 }
 
@@ -1579,7 +1815,9 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.nav-btn:not(.danger)').forEach(b=>b.classList.remove('active'));
   document.getElementById(`tab-${tab}`).classList.add('active');
   btn.classList.add('active');
-  if (tab === 'edit') loadAllOrders();
+  if (tab === 'edit')  loadAllOrders();
+  if (tab === 'utang') loadUtang();
+  if (tab === 'eod')   loadEOD();
 }
 
 function showScreen(name) {
@@ -1633,7 +1871,390 @@ async function callGAS(payload) {
   return data;
 }
 
-// ── SESSION RESTORE FROM COOKIE ───────────────────────
+// ═══════════════════════════════════════════════════════
+//  UTANG TRACKER
+// ═══════════════════════════════════════════════════════
+let utangOrders = null;
+
+async function loadUtang(force=false) {
+  if (!force && Array.isArray(utangOrders)) { renderUtang(utangOrders); return; }
+  document.getElementById('utang-list').innerHTML =
+    '<div class="sidebar-empty" style="padding:48px 0;">↻ Loading outstanding balances…</div>';
+  document.getElementById('utang-stats').style.display = 'none';
+  try {
+    const res = await callGAS({action:'getAllSheetOrders'});
+    if (!res.success) { showToast('Error loading utang.',true); return; }
+    utangOrders = res.orders || [];
+    renderUtang(utangOrders);
+  } catch(e) { showToast('Connection error.',true); }
+}
+
+function renderUtang(orders) {
+  const list   = document.getElementById('utang-list');
+  const stats  = document.getElementById('utang-stats');
+  const countEl= document.getElementById('utang-count');
+  const totalEl= document.getElementById('utang-total');
+
+  if (orders.length === 0) {
+    stats.style.display = 'none';
+    list.innerHTML = '<div class="sidebar-empty" style="padding:48px 0;color:var(--success);">✓ No outstanding balances — all paid up!</div>';
+    return;
+  }
+
+  // Compute total owed (for partial, only the remaining balance)
+  let totalOwed = 0;
+  orders.forEach(o => {
+    const v = (o.paymentStatus || '').toLowerCase();
+    if (v.indexOf('partial') !== -1) {
+      const m = o.paymentStatus.match(/₱(\d+(?:\.\d+)?)/);
+      const paid = m ? parseFloat(m[1]) : 0;
+      totalOwed += (parseFloat(o.total) || 0) - paid;
+    } else {
+      totalOwed += parseFloat(o.total) || 0;
+    }
+  });
+
+  stats.style.display = 'grid';
+  countEl.textContent = orders.length;
+  totalEl.textContent = `₱${totalOwed.toFixed(0)}`;
+
+  // Group by sheet (day)
+  const bySheet = {};
+  orders.forEach(o => {
+    if (!bySheet[o.sheetName]) bySheet[o.sheetName] = [];
+    bySheet[o.sheetName].push(o);
+  });
+
+  list.innerHTML = '';
+  Object.entries(bySheet).forEach(([sheet, dayOrders]) => {
+    const label = document.createElement('div');
+    label.className = 'utang-sheet-label';
+    label.textContent = sheet;
+    list.appendChild(label);
+
+    dayOrders.forEach(order => {
+      const isPartial = (order.paymentStatus || '').toLowerCase().indexOf('partial') !== -1;
+      const custDisplay = order.customer && order.customer !== '—' ? order.customer : 'No name';
+      const displayId   = order.orderId || `#ROW-${order.rowNum}`;
+
+      // Compute owed amount
+      let owedDisplay = `₱${order.total}`;
+      if (isPartial) {
+        const m = order.paymentStatus.match(/₱(\d+(?:\.\d+)?)/);
+        const paid = m ? parseFloat(m[1]) : 0;
+        const owed = (parseFloat(order.total) || 0) - paid;
+        owedDisplay = `₱${owed.toFixed(0)} <span style="font-size:11px;opacity:.6;">of ₱${order.total}</span>`;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'utang-card' + (isPartial ? ' partial-card' : '');
+      card.innerHTML = `
+        <div class="utang-card-top">
+          <div class="utang-card-left">
+            <div class="utang-card-name">${custDisplay}</div>
+            <div class="utang-card-meta">${displayId} · ${order.timestamp || ''}</div>
+          </div>
+          <div class="utang-card-right">
+            <div class="utang-card-total">${owedDisplay}</div>
+            <div class="utang-card-badges">
+              ${paymentBadgeHtml(order.paymentStatus)}
+              ${methodBadgeHtml(order.paymentMethod)}
+            </div>
+          </div>
+        </div>
+        <div class="utang-card-actions">
+          <button class="btn-mark-paid" onclick="markUtangPaid(${JSON.stringify(order).replace(/"/g,'&quot;')})">✓ Mark as Paid</button>
+        </div>`;
+      list.appendChild(card);
+    });
+  });
+}
+
+async function markUtangPaid(order) {
+  if (!confirm(`Mark ${order.customer !== '—' ? order.customer : 'this order'} (₱${order.total}) as Paid?`)) return;
+  showToast('⏳ Updating…');
+
+  // Optimistic remove
+  const idx = utangOrders ? utangOrders.findIndex(o => o.sheetName===order.sheetName && o.rowNum===order.rowNum) : -1;
+  if (idx >= 0) { utangOrders.splice(idx, 1); renderUtang(utangOrders); }
+
+  try {
+    const res = await callGAS({
+      action: 'updateOrder',
+      sheetName: order.sheetName,
+      rowNum: order.rowNum,
+      customer: order.customer,
+      items: order.items,
+      total: order.total,
+      paymentStatus: 'Paid',
+      paymentMethod: order.paymentMethod || 'Cash'
+    });
+    if (res.success) {
+      showToast('✓ Marked as paid!');
+      allOrders = null; // invalidate edit-tab cache for that day
+    } else {
+      if (idx >= 0) utangOrders.splice(idx, 0, order);
+      renderUtang(utangOrders);
+      showToast('Update failed.',true);
+    }
+  } catch(e) {
+    if (idx >= 0) utangOrders.splice(idx, 0, order);
+    renderUtang(utangOrders);
+    showToast('Connection error.',true);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  END OF DAY
+// ═══════════════════════════════════════════════════════
+async function loadEOD() {
+  const sheetEl = document.getElementById('eod-sheet-name');
+  if (sheetEl) sheetEl.textContent = activeSheetName || '—';
+  document.getElementById('eod-body').innerHTML =
+    '<div class="sidebar-empty" style="padding:48px 0;">↻ Generating summary…</div>';
+  try {
+    const res = await callGAS({action:'getDaySummary', sheetName:activeSheetName});
+    if (!res.success) { showToast('Error loading summary.',true); return; }
+    renderEOD(res);
+  } catch(e) { showToast('Connection error.',true); }
+}
+
+function renderEOD(data) {
+  const body = document.getElementById('eod-body');
+
+  // Top stats
+  const collectedPct = data.totalRevenue > 0
+    ? Math.round((data.paidTotal / data.totalRevenue) * 100)
+    : 0;
+
+  // Top 5 selling items by revenue
+  const itemRanked = Object.entries(data.itemTotals || {})
+    .filter(([,v]) => v > 0)
+    .sort((a,b) => b[1] - a[1]);
+  const maxItemVal = itemRanked.length > 0 ? itemRanked[0][1] : 1;
+
+  // Method breakdown
+  const mb = data.methodBreakdown || {Cash:0, GCash:0, Maya:0};
+
+  body.innerHTML = `
+    <div class="eod-stats">
+      <div class="eod-stat">
+        <div class="eod-stat-label">Total revenue</div>
+        <div class="eod-stat-val" style="color:var(--accent);">₱${(data.totalRevenue||0).toFixed(0)}</div>
+      </div>
+      <div class="eod-stat">
+        <div class="eod-stat-label">Orders</div>
+        <div class="eod-stat-val">${data.orderCount||0}</div>
+      </div>
+      <div class="eod-stat">
+        <div class="eod-stat-label">Collected</div>
+        <div class="eod-stat-val" style="color:var(--success);">₱${(data.paidTotal||0).toFixed(0)}</div>
+      </div>
+      <div class="eod-stat">
+        <div class="eod-stat-label">Outstanding</div>
+        <div class="eod-stat-val" style="color:var(--danger);">₱${((data.unpaidTotal||0)+(data.partialTotal||0)).toFixed(0)}</div>
+      </div>
+      <div class="eod-stat">
+        <div class="eod-stat-label">Avg order</div>
+        <div class="eod-stat-val">₱${data.orderCount > 0 ? Math.round(data.totalRevenue/data.orderCount) : 0}</div>
+      </div>
+      <div class="eod-stat">
+        <div class="eod-stat-label">% Collected</div>
+        <div class="eod-stat-val" style="color:${collectedPct>=80?'var(--success)':'var(--warning)'};">${collectedPct}%</div>
+      </div>
+    </div>
+
+    <div class="eod-section-title">Payment Method Breakdown</div>
+    <div class="eod-method-grid">
+      <div class="eod-method-card">
+        <div class="eod-method-name">Cash</div>
+        <div class="eod-method-val">₱${(mb.Cash||0).toFixed(0)}</div>
+      </div>
+      <div class="eod-method-card">
+        <div class="eod-method-name" style="color:var(--info);">GCash</div>
+        <div class="eod-method-val" style="color:var(--info);">₱${(mb.GCash||0).toFixed(0)}</div>
+      </div>
+      <div class="eod-method-card">
+        <div class="eod-method-name" style="color:#c084fc;">Maya</div>
+        <div class="eod-method-val" style="color:#c084fc;">₱${(mb.Maya||0).toFixed(0)}</div>
+      </div>
+    </div>
+
+    <div class="eod-section-title">Best Sellers</div>
+    <div class="eod-items-list">
+      ${itemRanked.slice(0,10).map(([name,val])=>`
+        <div class="eod-item-row">
+          <div class="eod-item-name">${name.toLowerCase()}</div>
+          <div class="eod-item-bar-wrap">
+            <div class="eod-item-bar" style="width:${Math.round((val/maxItemVal)*100)}%"></div>
+          </div>
+          <div class="eod-item-val">₱${val.toFixed(0)}</div>
+        </div>`).join('')}
+      ${itemRanked.length===0?'<div style="color:var(--muted);font-size:13px;">No items sold yet.</div>':''}
+    </div>
+
+    ${(data.unpaidTotal||0)+(data.partialTotal||0) > 0 ? `
+    <div class="eod-section-title" style="color:var(--danger);">Outstanding Balances</div>
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:14px 16px;border-left:3px solid var(--danger);">
+      <div style="font-size:13px;color:var(--text);margin-bottom:6px;">
+        ₱${((data.unpaidTotal||0)+(data.partialTotal||0)).toFixed(0)} still owed across unpaid &amp; partial orders.
+      </div>
+      <div style="font-size:12px;color:var(--muted);">Head to the <strong style="color:var(--text);">Utang</strong> tab to see and settle individual balances.</div>
+    </div>` : `
+    <div style="margin-top:16px;background:var(--surface2);border-radius:var(--radius);padding:14px 16px;border-left:3px solid var(--success);">
+      <div style="font-size:13px;color:var(--success);font-weight:700;">✓ All orders fully paid!</div>
+    </div>`}
+  `;
+}
+
+// ═══════════════════════════════════════════════════════
+//  THEME ENGINE
+//  - Theme stored in localStorage (key: st_theme)
+//  - Survives logout, tab close, device reboot
+//  - Only cleared by browser data wipe
+// ═══════════════════════════════════════════════════════
+
+const THEMES = {
+  'dark-gold': {
+    name: 'Dark Gold',
+    desc: 'Original · warm & bold',
+    preview: { bg:'#0f0f0f', surface:'#1a1a1a', accent:'#f5a623', bar1:'#f5a623', bar2:'#4caf82', btnColor:'#000' },
+    vars: {
+      '--bg':'#0f0f0f','--surface':'#1a1a1a','--surface2':'#242424','--border':'#2e2e2e',
+      '--accent':'#f5a623','--text':'#f0ede6','--muted':'#888',
+      '--accent-hover':'#ffb83f','--accent-text':'#000','--active-tint':'#1e1a10',
+    }
+  },
+  'midnight': {
+    name: 'Midnight Blue',
+    desc: 'Cool · calm · professional',
+    preview: { bg:'#081525', surface:'#0d1b2e', accent:'#4a9eff', bar1:'#4a9eff', bar2:'#4caf82', btnColor:'#000' },
+    vars: {
+      '--bg':'#081525','--surface':'#0d1b2e','--surface2':'#121f38','--border':'#1a2f4a',
+      '--accent':'#4a9eff','--text':'#e8f0fe','--muted':'#6a8aaa',
+      '--accent-hover':'#70b8ff','--accent-text':'#000','--active-tint':'#0f2040',
+    }
+  },
+  'forest': {
+    name: 'Forest Green',
+    desc: 'Earthy · easy on the eyes',
+    preview: { bg:'#081510', surface:'#0d1f15', accent:'#4caf82', bar1:'#4caf82', bar2:'#f5a623', btnColor:'#000' },
+    vars: {
+      '--bg':'#081510','--surface':'#0d1f15','--surface2':'#122018','--border':'#1a3522',
+      '--accent':'#4caf82','--text':'#e8f5ee','--muted':'#6a8a72',
+      '--accent-hover':'#6fcf97','--accent-text':'#000','--active-tint':'#0a2a18',
+    }
+  },
+  'light': {
+    name: 'Light Mode',
+    desc: 'Bright · clean · sharp',
+    preview: { bg:'#f5f5f3', surface:'#ffffff', accent:'#d4470a', bar1:'#d4470a', bar2:'#1a7a45', btnColor:'#fff' },
+    vars: {
+      '--bg':'#f5f5f3','--surface':'#ffffff','--surface2':'#eeede9','--border':'#dddcd8',
+      '--accent':'#d4470a','--text':'#1a1a18','--muted':'#888784',
+      '--accent-hover':'#b83a08','--accent-text':'#fff','--active-tint':'#fff5f0',
+    }
+  },
+  'rose': {
+    name: 'Rose',
+    desc: 'Warm · bold · fun',
+    preview: { bg:'#140a10', surface:'#1c0f14', accent:'#e86fa3', bar1:'#e86fa3', bar2:'#4caf82', btnColor:'#fff' },
+    vars: {
+      '--bg':'#140a10','--surface':'#1c0f14','--surface2':'#221018','--border':'#2e1820',
+      '--accent':'#e86fa3','--text':'#fae8f0','--muted':'#8a6a78',
+      '--accent-hover':'#f090bc','--accent-text':'#fff','--active-tint':'#2a1020',
+    }
+  },
+  'violet': {
+    name: 'Violet',
+    desc: 'Deep · rich · modern',
+    preview: { bg:'#0a0815', surface:'#100d1e', accent:'#9b8af4', bar1:'#9b8af4', bar2:'#4caf82', btnColor:'#fff' },
+    vars: {
+      '--bg':'#0a0815','--surface':'#100d1e','--surface2':'#181228','--border':'#1e1838',
+      '--accent':'#9b8af4','--text':'#ede8ff','--muted':'#7a6a9a',
+      '--accent-hover':'#b8acff','--accent-text':'#fff','--active-tint':'#1a1432',
+    }
+  },
+};
+
+let currentThemeId = 'dark-gold';
+
+function applyTheme(id, save=true) {
+  const theme = THEMES[id];
+  if (!theme) return;
+  currentThemeId = id;
+  const root = document.documentElement;
+  // Apply all variables
+  Object.entries(theme.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+  // Persist to localStorage (survives logout — intentional)
+  if (save) localStorage.setItem('st_theme', id);
+  // Refresh active-tint on nav buttons (already in CSS var, just re-trigger)
+  document.querySelectorAll('.nav-btn.active').forEach(b => {
+    b.style.background = theme.vars['--active-tint'];
+  });
+  // Update swatch selection ring in panel (if open)
+  document.querySelectorAll('.theme-swatch').forEach(sw => {
+    sw.classList.toggle('active', sw.dataset.theme === id);
+  });
+}
+
+function buildThemeGrid() {
+  const grid = document.getElementById('theme-grid');
+  grid.innerHTML = '';
+  Object.entries(THEMES).forEach(([id, t]) => {
+    const p = t.preview;
+    const swatch = document.createElement('div');
+    swatch.className = 'theme-swatch' + (id === currentThemeId ? ' active' : '');
+    swatch.dataset.theme = id;
+    swatch.style.background = p.surface;
+    swatch.style.border = '2px solid ' + (id === currentThemeId ? t.vars['--accent'] : 'transparent');
+    swatch.onclick = () => {
+      applyTheme(id);
+      // Update all swatch borders directly so panel stays open
+      document.querySelectorAll('.theme-swatch').forEach(sw => {
+        const swId = sw.dataset.theme;
+        sw.style.borderColor = swId === id ? THEMES[swId].vars['--accent'] : 'transparent';
+        sw.classList.toggle('active', swId === id);
+      });
+      showToast(`Theme: ${t.name}`);
+    };
+    swatch.innerHTML = `
+      <div class="ts-preview" style="background:${p.bg}">
+        <div class="ts-logo" style="color:${p.accent}">Sales<span style="color:${t.vars['--text']}">Tracker</span></div>
+        <div class="ts-bars">
+          <div class="ts-bar" style="width:70%;background:${p.bar1}"></div>
+          <div class="ts-bar" style="width:50%;background:${t.vars['--surface2']}"></div>
+          <div class="ts-bar" style="width:85%;background:${t.vars['--surface2']}"></div>
+        </div>
+        <button class="ts-btn" style="background:${p.accent};color:${p.btnColor}">${t.name}</button>
+      </div>
+      <div class="ts-footer" style="background:${p.surface};border-top:1px solid ${t.vars['--border']}">
+        <div class="ts-name" style="color:${t.vars['--text']}">${t.name}</div>
+        <div class="ts-desc" style="color:${t.vars['--muted']}">${t.desc}</div>
+      </div>`;
+    grid.appendChild(swatch);
+  });
+}
+
+function openThemePanel() {
+  buildThemeGrid();
+  document.getElementById('theme-overlay').classList.add('open');
+}
+function closeThemePanel() {
+  document.getElementById('theme-overlay').classList.remove('open');
+}
+function handleThemeOverlayClick(e) {
+  if (e.target === document.getElementById('theme-overlay')) closeThemePanel();
+}
+
+// ── Load saved theme immediately on page load (before login) ──
+(function loadSavedTheme() {
+  const saved = localStorage.getItem('st_theme');
+  if (saved && THEMES[saved]) applyTheme(saved, false);
+})();
+
+// ═══════════════════════════════════════════════════════
+//  SESSION RESTORE FROM COOKIE
 window.addEventListener('DOMContentLoaded', async () => {
   const savedUser  = getCookie('st_user');
   const savedSheet = getCookie('st_sheet');
